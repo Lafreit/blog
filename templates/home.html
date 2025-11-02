@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="post-list">
+    {% for post in object_list %}
+    <article class="post-entry">
+        <h2 class="post-title">
+            <a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a>
+        </h2>
+        <p class="post-body">{{ post.body|truncatewords:30 }}</p>
+        <div class="post-meta">
+            <span>Por {{ post.author }}</span>
+            <span>{{ post.created_at|date:"d M Y" }}</span>
+        </div>
+    </article>
+    {% empty %}
+    <div class="post-entry">
+        <p>Nenhum post ainda. <a href="{% url 'post_new' %}">Seja o primeiro a postar!</a></p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

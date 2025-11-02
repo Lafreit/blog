@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<article class="post-detail">
+    <h1 class="post-title">{{ post.title }}</h1>
+    <div class="post-meta">
+        <span>Por {{ post.author }}</span>
+        <span>{{ post.created_at|date:"d M Y" }}</span>
+        {% if post.updated_at != post.created_at %}
+        <span>Atualizado em {{ post.updated_at|date:"d M Y" }}</span>
+        {% endif %}
+    </div>
+    <div class="post-body">
+        {{ post.body|linebreaks }}
+    </div>
+    <div class="post-actions">
+        <a href="{% url 'post_edit' post.pk %}" class="btn btn-edit">Editar</a>
+        <a href="{% url 'post_delete' post.pk %}" class="btn btn-delete">Excluir</a>
+        <a href="{% url 'home' %}" class="btn btn-cancel">Voltar</a>
+    </div>
+</article>
+{% endblock content %}
