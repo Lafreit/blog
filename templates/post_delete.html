@@ -4,7 +4,7 @@
 <div class="delete-confirmation">
     <h1>Excluir Post</h1>
     <p>Tem certeza que deseja excluir o post "<strong>{{ post.title }}</strong>"?</p>
-    <form method="post">
+    <form action="" method="post">
         {% csrf_token %}
         <div class="form-actions">
             <button type="submit" class="btn btn-delete">Confirmar Exclusão</button>
