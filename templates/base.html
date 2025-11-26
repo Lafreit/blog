@@ -1,35 +1,59 @@
 <!-- templates/base.html -->
-{% load static %}
+{% load static i18n %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Meu Blog{% endblock %}</title>
+    <title>{% block title %}{% trans "Meu Blog" %}{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
     <header class="navbar">
-        <div class="nav-container">
-            <h1 class="nav-logo">
-                <a href="{% url 'home' %}">Aprendendo Django - Blog</a>
-            </h1>
-            <nav class="nav-links">
-                <a href="{% url 'home' %}" class="nav-link">Django blog</a>
-                <a href="{% url 'post_new' %}" class="nav-link button">+ New Blog Post</a>
-            </nav>
-        </div>
-    </header>
+    <div class="nav-container">
+        <h1 class="nav-logo">
+            <a href="{% url 'home' %}">{% trans "Aprendendo Django - Blog" %}</a>
+        </h1>
+    <nav class="nav-links">
+        <a href="{% url 'home' %}" class="nav-link">{% trans "Página inicial" %}</a>
+        <a href="{% url 'post_new' %}" class="nav-link button">+ {% trans "Novo Post" %}</a>
+    
+        {% if user.is_authenticated %}
+            <form method="post" action="{% url 'logout' %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="nav-link btn-cancel">{% trans "Sair" %}</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}" class="nav-link">{% trans "Entrar" %}</a>
+            <a href="{% url 'signup' %}" class="nav-link btn-signup">{% trans "Cadastrar-se" %}</a>
+        {% endif %}
+    </nav>
+    </div>
+</header>
 
     <main class="container">
-        {% block content %}
-        {% endblock content %}
-    </main>
+    {% if user.is_authenticated %}
+        <p>{% trans "Olá" %}, {{ user.username }}!</p>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-cancel">{% trans "Sair" %}</button>
+        </form>
+    {% else %}
+        <p>
+            <a href="{% url 'login' %}" class="btn btn-edit">{% trans "Entrar" %}</a>
+            <a href="{% url 'signup' %}" class="btn btn-cancel">{% trans "Cadastrar-se" %}</a>
+        </p>
+    {% endif %}
+
+    {% block content %}
+    {% endblock content %}
+</main>
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Meu Blog. Todos os direitos reservados.</p>
+            <p>&copy; {% now "Y" %} Meu Blog. Todos os direitos reservados.</p>
         </div>
     </footer>
 </body>

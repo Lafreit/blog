@@ -1,0 +1,47 @@
+<!-- templates/signup.html -->
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="form-container">
+    <h1 class="form-title">{% trans "Cadastrar-se" %}</h1>
+
+    {% if form.errors %}
+        <div class="form-errors">
+            <ul>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li><strong>{{ field.label }}:</strong>{{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="id_username">{% trans "Nome do usuário" %}:</label>
+            {{ form.username }}
+        </div>
+        <div class="form-group">
+            <label for="id_password1">{% trans "Senha" %}:</label>
+            {{ form.password1 }}
+        </div>
+        <div class="form-group">
+            <label for="id_password2">{% trans "Confirmar Senha" %}:</label>
+            {{ form.password2 }}
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-edit">{% trans "Cadastrar-se" %}</button>
+            <a href="{% url 'login' %}" class="btn btn-cancel">{% trans "Cancelar" %}</a>
+        </div>
+    </form>
+</div>
+{% endblock content %}

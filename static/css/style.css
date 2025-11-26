@@ -334,3 +334,82 @@ body {
         text-align: center;
     }
 }
+
+/* Form Errors */
+.form-errors {
+    background: var(--danger-color);
+    color: var(--white);
+    padding: 1rem;
+    border-radius: var(--radius);
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+.form-errors ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.form-errors li {
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+}
+
+/* Highlight invalid fields */
+.form-group input.is-invalid,
+.form-group textarea.is-invalid,
+.form-group select.is-invalid {
+    border-color: var(--danger-color);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+}
+
+.form-group input.is-invalid:focus,
+.form-group textarea.is-invalid:focus,
+.form-group select.is-invalid:focus {
+    border-color: var(--danger-color);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3);
+}
+
+/* Botão de destaque para cadastro */
+.btn-signup {
+    background: var(--success-color); /* verde */
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+.btn-signup:hover {
+    background: #059669; /* tom mais escuro de verde */
+    color: var(--white);
+}
+
+/* Botão de destaque para cadastro */
+.btn-signup {
+    background: var(--success-color); /* verde */
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+/* Hover */
+.btn-signup:hover {
+    background: #059669; /* verde mais escuro */
+    color: var(--white);
+}
+
+/* Responsividade: em telas pequenas, botão se adapta */
+@media (max-width: 768px) {
+    .btn-signup {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-top: 0.5rem;
+    }
+}

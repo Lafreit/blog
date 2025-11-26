@@ -20,5 +20,7 @@ from django.urls import path, include # include function imported
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')), # Include auth URLs
+    path('accounts/', include('accounts.urls')), # Include accounts app URLs
     path('', include('blog.urls')), # Include blog app URLs at the root
+    path("accounts/", include("django.contrib.auth.urls")), # Authentication URLs
 ]
